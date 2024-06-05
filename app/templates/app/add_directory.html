@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} <h1>Форма добавление раздела</h1> {% endblock title %}
+{% block content %}
+<div class="container">
+    <form enctype="multipart/form-data" method="POST" class="container__form-add">
+        <div class="form-add__item">
+            <p>Название раздела:</p>
+            {{form.name}}
+        </div>
+
+        <div class="form-add__item">
+            <p>Раздел-родитель:</p>
+            {{form.parent}}
+        </div>
+
+        <div class="form-add__item">
+            <p>Добавьте изображение:</p>
+            {{form.image}}
+        </div>
+        {% csrf_token %}
+        <input type="submit" value="Создать"/>
+    </form>
+</div>
+{% endblock content %}

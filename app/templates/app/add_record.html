@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} <h1>Форма добавление записи</h1> {% endblock title %}
+{% block content %}
+<div class="container">
+    <form type="multi/application" method="POST" class="container__form-add">
+        <div class="form-add__item">
+            <p>Название записи:</p>
+            {{form.title}}
+        </div>
+
+        <div class="form-add__item">
+            <p>Основной контент (код):</p>
+            {{form.content}}
+        </div>
+
+        <div class="form-add__item">
+            <p>Дополнительное описание:</p>
+            {{form.description}}
+        </div>
+
+        <div class="form-add__item">
+            <p>Раздел:</p>
+            {{form.directory}}
+        </div>
+        {% csrf_token %}
+        <input type="submit" value="Создать"/>
+    </form>
+</div>
+
+<script>
+    function load(){
+        let item = document.querySelector("option");
+        item.remove()
+    }
+    window.onload = load
+
+</script>
+{% endblock content %}

@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="container">
+    <a href="{% url 'add_directory'%}">Добавить раздел</a>
+    <ul class="container__directories">
+        {% for dir in directories %}
+            <li class="directories__item">
+                <div class="item__top">
+                    <img src="media/{{dir.image}}"/>
+                    <form method="POST" action="{% url 'del_directory' dir.id %}">
+                        {% csrf_token %}
+                        <input type="submit" value="del" />
+                    </form>
+                    <a href="{% url 'change_directory' dir.id %}">up</a>
+                </div>
+                <a href="{% url 'directory_detail' dir.id %}">{{dir.name}}</a>
+            </li>
+        {% endfor %}
+    </ul>
+</div>
+
+
+{% endblock content %}

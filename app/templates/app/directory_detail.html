@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="container">
+    {% if directory.parent is not None %}
+        <a href="{% url 'directory_detail' directory.parent.id %}">Подняться выше</a>
+    {% else %}
+        <a href="{% url 'directory_list' %}">Подняться выше</a>
+    {% endif %}
+    <a href="{% url 'add_subdirectory' directory.id %}">Добавить раздел</a>
+    <a href="{% url 'add_record' directory.id %}">Добавить запись</a>
+
+    <ul class="container__directories">
+        {% for subdir in subdirectories %}
+            <li class="directories__item">
+                <div class="item__top">
+                    <img src="media/{{subdir.image}}"/>
+                    <form method="POST" action="{% url 'del_directory' subdir.id %}">
+                        {% csrf_token %}
+                        <input type="submit" value="del" />
+                    </form>
+                    <a href="{% url 'change_subdirectory' directory.id subdir.id %}">up</a>
+                </div>
+                <a href="{% url 'directory_detail' dir.id %}">{{subdir.name}}</a>
+            </li>
+        {% endfor %}
+    </ul>
+
+    <ul class="container__records">
+        {% for rec in records %}
+            <li class="records__item">
+                <details>
+                    <summary>{{rec.title}}</summary>
+                    <pre>{{rec.content}}</pre>
+                    <form method="POST" action="{% url 'del_record' directory.id rec.id %}">
+                        {% csrf_token %}
+                        <input type="submit" value="del" />
+                    </form>
+                    <a href="{% url 'change_record' directory.id rec.id %}">up</a>
+                    <details>
+                        <summary>Подробнее</summary>
+                        <pre>{{rec.description}}</pre>
+                    </details>
+                </details>
+            </li>
+        {% endfor %}
+    </ul>
+
+</div>
+
+
+{% endblock content %}
