@@ -19,6 +19,10 @@
             <h2>Эффективность</h2>
             <p>Располагайте элементы по смыслу для большей эеффективности.</p>
         </div>
-        <a href="{% url 'auth' %}" class="start-button">Начать</a>
+        {% if request.user.is_authenticated %}
+        <a href="{% url 'directory_list' %}" class="start-button">Продолжить</a>
+        {% else %}
+        <a href="{% url 'authorization' %}" class="start-button">Начать</a>
+        {% endif %}
     </div>
 {% endblock content %}

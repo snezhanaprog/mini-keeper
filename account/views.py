@@ -61,6 +61,7 @@ def registration(request):
     form = UserRegisterForm()
     if request.method == 'POST':
         form = UserRegisterForm(request.POST)
+        print(form)
         if User.objects.filter(email=request.POST.get('email'), is_active=True).exists():
             message = "Эта почта уже зарегистрирована"
         elif len(request.POST.get('password1')) < 8:

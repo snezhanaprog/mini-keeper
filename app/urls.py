@@ -2,12 +2,13 @@ from django.urls import path
 from . import views
 from django.conf import settings
 from django.conf.urls.static import static
-from account.views import authorization, registration, log_out
+from account.views import authorization, registration, log_out, activate
 
 urlpatterns = [
     path('directories', views.directory_list, name='directory_list'),
     path('', views.start, name='start'),
     path('auth/', authorization, name='authorization'),
+    path('activate/<uidb64>/<token>/', activate, name='activate'),
     path('reg/', registration, name='registration'),
     path('log_out/', log_out, name='log_out'),
     path('directory/<int:pk>/', views.directory_detail, name='directory_detail'),

@@ -97,13 +97,13 @@ details pre {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.form-add__item {
+.form-add__item, .form__item {
     margin-bottom: 20px;
     color:#007bff;
 }
 
 .form-add__item p {
-    margin: 0 0 5px;
+    margin: 0 5px 5px;
     font-weight: bold;
 }
 
@@ -112,7 +112,7 @@ input[type="submit"] {
     background-color: #4e9bed;
     color: white;
     border: none;
-    padding: 5px 10px;
+    padding: 10px 15px;
     cursor: pointer;
     border-radius: 5px;
     transition: background-color 0.3s ease, transform 0.3s ease;
