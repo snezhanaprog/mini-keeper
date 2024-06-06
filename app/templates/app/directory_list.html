@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% block title %}Всё здесь - содержание раздела{% endblock title %}
 {% block content %}
 <div class="container">
     <a href="{% url 'add_directory'%}">Добавить раздел</a>
@@ -10,9 +11,9 @@
                     <img src="media/{{dir.image}}"/>
                     <form method="POST" action="{% url 'del_directory' dir.id %}">
                         {% csrf_token %}
-                        <input type="submit" value="del" />
+                        <input type="submit" value="&#215;" />
                     </form>
-                    <a href="{% url 'change_directory' dir.id %}">up</a>
+                    <a href="{% url 'change_directory' dir.id %}">&#9998;</a>
                 </div>
                 <a href="{% url 'directory_detail' dir.id %}">{{dir.name}}</a>
             </li>

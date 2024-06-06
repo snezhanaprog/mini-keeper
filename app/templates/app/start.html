@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block name %}
+    <div class="header">
+        <h1>Добро пожаловать на хранилище "Всё здесь" </h1>
+    </div>
+{% endblock name %}
+{% block content %}
+<div class="content">
+        <div class="benefit">
+            <h2>Удобство</h2>
+            <p>Добавляйте, удаляйте и редактируйте записи в любое время.</p>
+        </div>
+        <div class="benefit">
+            <h2>Безопасность</h2>
+            <p>Ваши данные защищены и доступны только вам.</p>
+        </div>
+        <div class="benefit">
+            <h2>Эффективность</h2>
+            <p>Располагайте элементы по смыслу для большей эеффективности.</p>
+        </div>
+        <a href="{% url 'auth' %}" class="start-button">Начать</a>
+    </div>
+{% endblock content %}

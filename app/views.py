@@ -1,15 +1,21 @@
 from django.shortcuts import render, redirect
 from .models import *
 from .forms import *
+from account.urls import *
+from account.views import *
+
+
+def start(request):
+    return render(request, 'app/start.html')
 
 
 def directory_list(request):
-    directories = Directory.objects.filter(parent__isnull=True)
+    directories = Directory.objects.filter(parent__isnull=True, user=request.user)
     return render(request, "app/directory_list.html", {'directories': directories})
 
 
 def directory_detail(request, pk):
-    directory = Directory.objects.get(pk=pk)
+    directory = Directory.objects.get(pk=pk, user=request.user)
     subdirectories = directory.subdirectories.all()
     records = directory.records.all()
     context ={
@@ -24,7 +30,9 @@ def add_directory(request, parent_id=None):
     if request.method == 'POST':
         form = DirectoryForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
+            directory = form.save(commit=False)
+            directory.user = request.user
+            directory.save()
             return redirect('directory_list')
     else:
         form = DirectoryForm(initial={'parent': parent_id})
@@ -34,6 +42,7 @@ def add_directory(request, parent_id=None):
 def add_record(request, directory_id):
     if request.method == 'POST':
         form = RecordForm(request.POST)
+        form.user = request.user
         if form.is_valid():
             form.save()
             return redirect('directory_detail', pk=directory_id)

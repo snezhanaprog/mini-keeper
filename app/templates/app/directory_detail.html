@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% block title %} Всё здесь - список разделов {% endblock title %}
 {% block content %}
 <div class="container">
     {% if directory.parent is not None %}
@@ -17,9 +18,9 @@
                     <img src="media/{{subdir.image}}"/>
                     <form method="POST" action="{% url 'del_directory' subdir.id %}">
                         {% csrf_token %}
-                        <input type="submit" value="del" />
+                        <input type="submit" value="&#215;" />
                     </form>
-                    <a href="{% url 'change_subdirectory' directory.id subdir.id %}">up</a>
+                    <a href="{% url 'change_subdirectory' directory.id subdir.id %}">&#9998;</a>
                 </div>
                 <a href="{% url 'directory_detail' dir.id %}">{{subdir.name}}</a>
             </li>
@@ -34,9 +35,9 @@
                     <pre>{{rec.content}}</pre>
                     <form method="POST" action="{% url 'del_record' directory.id rec.id %}">
                         {% csrf_token %}
-                        <input type="submit" value="del" />
+                        <input type="submit" value="&#215;" />
                     </form>
-                    <a href="{% url 'change_record' directory.id rec.id %}">up</a>
+                    <a href="{% url 'change_record' directory.id rec.id %}">&#9998;</a>
                     <details>
                         <summary>Подробнее</summary>
                         <pre>{{rec.description}}</pre>
