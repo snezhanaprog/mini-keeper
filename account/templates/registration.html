@@ -26,13 +26,13 @@
                             {{form.password1}}
                         </div>
                         <div class="form__item">
-                            <label>Подтвердите пароль</label>
+                            <label>Пароль (ещё раз)</label>
                             {{form.password2}}
                         </div>
                     </div>
                     {% csrf_token %}
                     {% if message != None %}
-                            <div class="message-invalid">{{message}}</div>
+                            <div class="message-invalid" name="message">{{message}}</div>
                     {% endif %}
                     <input type="submit" value="Зарегистрироваться" class="form__button">
                 </form>

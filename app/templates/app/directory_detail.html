@@ -3,26 +3,30 @@
 {% block title %} Всё здесь - список разделов {% endblock title %}
 {% block content %}
 <div class="container">
-    {% if directory.parent is not None %}
-        <a href="{% url 'directory_detail' directory.parent.id %}">Подняться выше</a>
-    {% else %}
-        <a href="{% url 'directory_list' %}">Подняться выше</a>
-    {% endif %}
-    <a href="{% url 'add_subdirectory' directory.id %}">Добавить раздел</a>
-    <a href="{% url 'add_record' directory.id %}">Добавить запись</a>
-
+        {% if directory.parent is not None %}
+            <a href="{% url 'directory_detail' directory.parent.id %}">Подняться выше</a>
+        {% else %}
+            <a href="{% url 'directory_list' %}">Подняться выше</a>
+        {% endif %}
+        <a href="{% url 'add_subdirectory' directory.id %}">Добавить раздел</a>
+        <a href="{% url 'add_record' directory.id %}">Добавить запись</a>
     <ul class="container__directories">
         {% for subdir in subdirectories %}
             <li class="directories__item">
                 <div class="item__top">
                     <img src="media/{{subdir.image}}"/>
+
                     <form method="POST" action="{% url 'del_directory' subdir.id %}">
                         {% csrf_token %}
                         <input type="submit" value="&#215;" />
                     </form>
                     <a href="{% url 'change_subdirectory' directory.id subdir.id %}">&#9998;</a>
+
                 </div>
                 <a href="{% url 'directory_detail' dir.id %}">{{subdir.name}}</a>
+                {% if subdir.user != subdir.author %}
+                <p>Автор: {{dir.author}}</p>
+                {% endif %}
             </li>
         {% endfor %}
     </ul>
@@ -32,12 +36,15 @@
             <li class="records__item">
                 <details>
                     <summary>{{rec.title}}</summary>
+                    {% if rec.user != rec.author %}
+                    <p>Автор: {{rec.author}}</p>
+                    {% endif %}
                     <pre>{{rec.content}}</pre>
-                    <form method="POST" action="{% url 'del_record' directory.id rec.id %}">
-                        {% csrf_token %}
-                        <input type="submit" value="&#215;" />
-                    </form>
-                    <a href="{% url 'change_record' directory.id rec.id %}">&#9998;</a>
+                        <form method="POST" action="{% url 'del_record' directory.id rec.id %}">
+                            {% csrf_token %}
+                            <input type="submit" value="&#215;" />
+                        </form>
+                        <a href="{% url 'change_record' directory.id rec.id %}">&#9998;</a>
                     <details>
                         <summary>Подробнее</summary>
                         <pre>{{rec.description}}</pre>

@@ -5,10 +5,10 @@ from .models import Directory, Record
 class DirectoryForm(forms.ModelForm):
     class Meta:
         model = Directory
-        fields = ['name', 'parent', 'image']
+        fields = ['name', 'parent', 'image', 'type']
 
 
 class RecordForm(forms.ModelForm):
     class Meta:
         model = Record
-        fields = ['title', 'content', 'directory', 'description']
+        fields = ['title', 'content', 'directory', 'description', 'type']

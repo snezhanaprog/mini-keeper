@@ -2,13 +2,12 @@ from django.urls import path
 from . import views
 from django.conf import settings
 from django.conf.urls.static import static
-from account.views import authorization, registration, log_out, activate
+from account.views import authorization, registration, log_out
 
 urlpatterns = [
     path('directories', views.directory_list, name='directory_list'),
     path('', views.start, name='start'),
     path('auth/', authorization, name='authorization'),
-    path('activate/<uidb64>/<token>/', activate, name='activate'),
     path('reg/', registration, name='registration'),
     path('log_out/', log_out, name='log_out'),
     path('directory/<int:pk>/', views.directory_detail, name='directory_detail'),
@@ -20,4 +19,7 @@ urlpatterns = [
     path('directory/<int:directory_id>/record/<int:record_id>/change/', views.change_record, name='change_record'),
     path('directory/<int:directory_id>/change/', views.change_directory, name='change_directory'),
     path('directory/<int:parent_id>/change/<int:directory_id>', views.change_directory, name='change_subdirectory'),
+    path('public_directories/', views.public_directories, name='public_directories'),
+    path('add_directory_to_user/<int:directory_id>/', views.add_directory_to_user, name='add_directory_to_user'),
+    path('add_record_to_user/<int:record_id>/', views.add_record_to_user, name='add_record_to_user'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

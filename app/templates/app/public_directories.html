@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="container">
+    <h2>Публичные разделы</h2>
+    <ul>
+        {% for directory in directories %}
+            <li class="item">
+                <a href="{% url 'directory_detail' directory.id %}">{{directory.name}} (Автор: {{ directory.user.username }})</a>
+                <a href="{% url 'add_directory_to_user' directory.id %}">Добавить себе</a>
+            </li>
+        {% endfor %}
+    </ul>
+    <h2>Публичные записи</h2>
+    <ul>
+        {% for record in records %}
+            <li class="item">
+                {{ record.title }} (Автор: {{ record.user.username }})
+                <a href="{% url 'add_record_to_user' record.id %}">Добавить себе</a>
+                <details>
+                    <summary>{{record.title}}</summary>
+                    {% if record.user != record.author %}
+                    <p>Автор: {{record.author}}</p>
+                    {% endif %}
+                    <pre>{{record.content}}</pre>
+                    <details>
+                        <summary>Подробнее</summary>
+                        <pre>{{record.description}}</pre>
+                    </details>
+                </details>
+            </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock content %}

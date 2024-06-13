@@ -24,6 +24,10 @@
             <p>Раздел:</p>
             {{form.directory}}
         </div>
+        <div class="form-add__item">
+            <p>Право доступа:</p>
+            {{form.type}}
+        </div>
         {% csrf_token %}
         <input type="submit" value="Создать"/>
     </form>

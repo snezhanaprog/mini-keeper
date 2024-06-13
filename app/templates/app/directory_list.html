@@ -16,6 +16,9 @@
                     <a href="{% url 'change_directory' dir.id %}">&#9998;</a>
                 </div>
                 <a href="{% url 'directory_detail' dir.id %}">{{dir.name}}</a>
+                {% if dir.user != dir.author %}
+                <p>Автор: {{dir.author}}</p>
+                {% endif %}
             </li>
         {% endfor %}
     </ul>
