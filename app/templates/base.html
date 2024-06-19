@@ -6,16 +6,18 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="keywords" content="хранилище данных, онлайн-хранилище, управление файлами, организация данных, безопасное хранилище, создание раздела, редактирование раздела,
+    создание записи, редактирование записи, управление контентом, управление данными" />
     <link href="{% static 'css/style.css' %}" rel="stylesheet">
     <title>{% block title %}Всё здесь{% endblock title %}</title>
 </head>
 <body>
 <nav>
-    <a href="{% url 'start' %}">Главная</a>
+    <a href="{% url 'start' %}" name="main">Главная</a>
     {% if request.user.is_authenticated %}
-    <a href="{% url 'directory_list' %}">Моё хранилище</a>
-    <a href="{% url 'public_directories' %}">Другие хранилища</a>
-    <a  href="{% url 'log_out'%}" class="exit-a">Выйти</a>
+    <a href="{% url 'directory_list' %}" name="my_keeper">Моё хранилище</a>
+    <a href="{% url 'public_directories' %}" name="other_keeper">Другие хранилища</a>
+    <a  href="{% url 'log_out'%}" class="exit-a" name="exit">Выйти</a>
     {% endif %}
 </nav>
 {% block name %}<h1>Всё здесь</h1> {% endblock name %}
